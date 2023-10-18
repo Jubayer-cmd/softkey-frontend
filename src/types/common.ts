@@ -4,6 +4,16 @@ export interface IMeta {
   total: number;
 }
 
+export interface IService {
+  id: string;
+  name: string;
+  description: string;
+  image: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+}
+
 export type ResponseSuccessType = {
   data: any;
   meta?: IMeta;

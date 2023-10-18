@@ -1,13 +1,13 @@
-import type { MenuProps } from "antd";
 import {
-  ProfileOutlined,
-  TableOutlined,
   AppstoreOutlined,
-  ScheduleOutlined,
-  ThunderboltOutlined,
   CreditCardOutlined,
   FileTextOutlined,
+  ProfileOutlined,
+  ScheduleOutlined,
+  TableOutlined,
+  ThunderboltOutlined,
 } from "@ant-design/icons";
+import type { MenuProps } from "antd";
 import Link from "next/link";
 import { USER_ROLE } from "./role";
 export const sidebarItems = (role: string) => {
@@ -31,14 +31,14 @@ export const sidebarItems = (role: string) => {
 
   const commonAdminSidebarItems: MenuProps["items"] = [
     {
-      label: <Link href={`/${role}/manage-student`}>Manage Students</Link>,
+      label: <Link href={`/${role}/manage-service`}>Manage Service</Link>,
       icon: <TableOutlined />,
-      key: `/${role}/manage-student`,
+      key: `/${role}/manage-service`,
     },
     {
-      label: <Link href={`/${role}/manage-faculty`}>Manage Faculty</Link>,
+      label: <Link href={`/${role}/manage-product`}>Manage Product</Link>,
       icon: <TableOutlined />,
-      key: `/${role}/manage-faculty`,
+      key: `/${role}/manage-product`,
     },
   ];
 
