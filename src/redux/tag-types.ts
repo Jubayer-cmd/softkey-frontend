@@ -1,7 +1,7 @@
 export enum tagTypes {
   user = 'user',
   service = 'service',
-  faculty = 'faculty',
+  product = 'product',
   admin = 'admin',
   student = 'student',
   academicFaculty = 'academic-faculty',
@@ -20,7 +20,7 @@ export enum tagTypes {
 export const tagTypesList = [
   tagTypes.user,
   tagTypes.service,
-  tagTypes.faculty,
+  tagTypes.product,
   tagTypes.admin,
   tagTypes.student,
   tagTypes.academicFaculty,
