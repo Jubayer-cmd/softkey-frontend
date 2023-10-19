@@ -38,10 +38,10 @@ export default function ProductPage() {
      query['searchTerm'] = debouncedTerm;
    }
    const { data, isLoading } = useProductsQuery({ ...query });
-console.log(data);
+
    const products = data?.products;
    const meta = data?.meta;
-
+console.log("fdfadfad",products);
    const deleteHandler = async (id: string) => {
      message.loading('Deleting.....');
      try {
@@ -56,83 +56,84 @@ console.log(data);
      }
    };
 
-   const columns = [
-     {
-       title: 'Name',
-       dataIndex: 'name',
-       sorter: true,
-       render: function (data: any) {
-         return <>{data?.title}</>;
-       },
-     },
-     {
-       title: 'Description',
-       dataIndex: 'description',
-       sorter: true,
-       render: function (data: any) {
-         return <>{data?.title}</>;
-       },
-     },
-     {
-       title: 'Price',
-       dataIndex: 'price',
-       sorter: true,
-       render: function (data: any) {
-         return <>{data?.title}</>;
-       },
-     },
-     {
-       title: 'Stock',
-       dataIndex: 'stock',
-       sorter: true,
-       render: function (data: any) {
-         return <>{data?.title}</>;
-       },
-     },
-     {
-       title: 'Quantity',
-       dataIndex: 'quantity',
-       sorter: true,
-       render: function (data: any) {
-         return <>{data?.title}</>;
-       },
-     },
-     {
-       title: 'CreatedAt',
-       dataIndex: 'createdAt',
-       render: function (data: any) {
-         return data && dayjs(data).format('MMM D, YYYY hh:mm A');
-       },
-       sorter: true,
-     },
-     {
-       title: 'Action',
-       render: function (data: any) {
-         return (
-           <>
-             <Link href={`/admin/offered-course/edit/${data?.id}`}>
-               <Button
-                 style={{
-                   margin: '0px 5px',
-                 }}
-                 onClick={() => console.log(data)}
-                 type="primary"
-               >
-                 <EditOutlined />
-               </Button>
-             </Link>
-             <Button
-               onClick={() => deleteHandler(data?.id)}
-               type="primary"
-               danger
-             >
-               <DeleteOutlined />
-             </Button>
-           </>
-         );
-       },
-     },
-   ];
+const columns = [
+  {
+    title: 'Name',
+    dataIndex: 'name',
+    sorter: true,
+    render: function (data: any) {
+      return <>{data?.name}</>;
+    },
+  },
+  {
+    title: 'Description',
+    dataIndex: 'description',
+    sorter: true,
+    render: function (data: any) {
+      return <>{data?.description}</>;
+    },
+  },
+  {
+    title: 'Price',
+    dataIndex: 'price',
+    sorter: true,
+    render: function (data: any) {
+      return <>{data?.price}</>;
+    },
+  },
+  {
+    title: 'Stock',
+    dataIndex: 'stock',
+    sorter: true,
+    render: function (data: any) {
+      return <>{data?.stock}</>;
+    },
+  },
+  {
+    title: 'Quantity',
+    dataIndex: 'quantity',
+    sorter: true,
+    render: function (data: any) {
+      return <>{data?.quantity}</>;
+    },
+  },
+  {
+    title: 'CreatedAt',
+    dataIndex: 'createdAt',
+    render: function (data: any) {
+      return data && dayjs(data).format('MMM D, YYYY hh:mm A');
+    },
+    sorter: true,
+  },
+  {
+    title: 'Action',
+    render: function (data: any) {
+      return (
+        <>
+          <Link href={`/admin/offered-course/edit/${data?.id}`}>
+            <Button
+              style={{
+                margin: '0px 5px',
+              }}
+              onClick={() => console.log(data)}
+              type="primary"
+            >
+              <EditOutlined />
+            </Button>
+          </Link>
+          <Button
+            onClick={() => deleteHandler(data?.id)}
+            type="primary"
+            danger
+          >
+            <DeleteOutlined />
+          </Button>
+        </>
+      );
+    },
+  },
+];
+
 
    const onPaginationChange = (page: number, pageSize: number) => {
      console.log('Page:', page, 'PageSize:', pageSize);
@@ -170,7 +171,7 @@ console.log(data);
             },
           ]}
         />
-        <ActionBar title="Student List">
+        <ActionBar title="Products">
           <Input
             size="large"
             placeholder="Search"
