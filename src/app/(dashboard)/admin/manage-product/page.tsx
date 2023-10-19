@@ -61,42 +61,31 @@ const columns = [
     title: 'Name',
     dataIndex: 'name',
     sorter: true,
-    render: function (data: any) {
-      return <>{data?.name}</>;
-    },
-  },
-  {
-    title: 'Description',
-    dataIndex: 'description',
-    sorter: true,
-    render: function (data: any) {
-      return <>{data?.description}</>;
-    },
   },
   {
     title: 'Price',
     dataIndex: 'price',
     sorter: true,
-    render: function (data: any) {
-      return <>{data?.price}</>;
-    },
   },
   {
     title: 'Stock',
     dataIndex: 'stock',
-    sorter: true,
-    render: function (data: any) {
-      return <>{data?.stock}</>;
-    },
   },
   {
     title: 'Quantity',
     dataIndex: 'quantity',
     sorter: true,
-    render: function (data: any) {
-      return <>{data?.quantity}</>;
-    },
   },
+{
+  title: 'Category',
+  dataIndex: 'categoryId', // Use the categoryId property
+  sorter: true,
+  render: function (data: any, record: any) {
+    // Access the category name from the Category object
+    const categoryName = record.Category?.name || 'Category Not Found';
+    return categoryName;
+  },
+},
   {
     title: 'CreatedAt',
     dataIndex: 'createdAt',
@@ -121,11 +110,7 @@ const columns = [
               <EditOutlined />
             </Button>
           </Link>
-          <Button
-            onClick={() => deleteHandler(data?.id)}
-            type="primary"
-            danger
-          >
+          <Button onClick={() => deleteHandler(data?.id)} type="primary" danger>
             <DeleteOutlined />
           </Button>
         </>
@@ -155,13 +140,6 @@ const columns = [
 
   return (
     <div>
-      <p> manage-product</p>
-      <Link className="bg-blue-500" href="/admin/manage-product/create">
-        <Button className="bg-blue-500" type="primary">
-          Create
-        </Button>
-      </Link>
-
       <div>
         <UMBreadCrumb
           items={[
@@ -181,8 +159,8 @@ const columns = [
             }}
           />
           <div>
-            <Link href="/admin/manage-student/create">
-              <Button type="primary">Create</Button>
+            <Link  href="/admin/manage-product/create">
+              <Button className="bg-blue-500" type="primary">Create</Button>
             </Link>
             {(!!sortBy || !!sortOrder || !!searchTerm) && (
               <Button
