@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.ant-drawer-header {
+  background-color: #404c68;
+  border-radius: 0;
+}
+
+.ant-drawer-title {
+  color: #fff;
+}
+
+.ant-drawer-close {
+  color: #fff;
+}
