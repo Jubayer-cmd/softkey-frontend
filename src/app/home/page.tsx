@@ -1,9 +1,9 @@
-import Link from 'next/link';
 import CarouselPage from './carousel';
 import Footer from './footer';
 import Navbar from './navbar';
 import ProductsList from './products';
 import SectionPage from './section';
+import ServiceList from './services';
 
 export default function HomePage() {
   return (
@@ -11,8 +11,7 @@ export default function HomePage() {
       <Navbar />
       <CarouselPage />
       <ProductsList />
-      <Link href="/profile">Dashboard</Link>
-      <h1 className="text-5xl mt-10">wowww</h1>
+      <ServiceList  />
       <SectionPage />
       <Footer />
     </div>
