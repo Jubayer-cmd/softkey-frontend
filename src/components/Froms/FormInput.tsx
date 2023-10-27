@@ -2,17 +2,17 @@
 
 import { getErrorMessageByPropertyName } from "@/utils/schema-validator";
 import { Input } from "antd";
-import { spawn } from "child_process";
-import { useFormContext, Controller } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 interface IInput {
   name: string;
   type?: string;
-  size?: "large" | "small";
+  size?: 'large' | 'small';
   value?: string | string[] | undefined;
   id?: string;
   placeholder?: string;
   validation?: object;
   label?: string;
+  readonly?: boolean;
   required?: boolean;
 }
 
@@ -25,6 +25,7 @@ const FormInput = ({
   placeholder,
   validation,
   label,
+  readonly,
   required,
 }: IInput) => {
   const {
@@ -62,6 +63,7 @@ const FormInput = ({
             <Input
               type={type}
               size={size}
+              readOnly={readonly}
               placeholder={placeholder}
               {...field}
               value={value ? value : field.value}

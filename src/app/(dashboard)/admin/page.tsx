@@ -1,40 +1,42 @@
-
-"use client";
-import Form from "@/components/Froms/Form";
-import FormInput from "@/components/Froms/FormInput";
-import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
-import { useUpdateuserMutation, useUserIdQuery } from "@/redux/api/adminApi/userApi";
-import { getUserInfo } from "@/services/auth.service";
-import { Button, message } from "antd";
+'use client';
+import Form from '@/components/Froms/Form';
+import FormInput from '@/components/Froms/FormInput';
+import UMBreadCrumb from '@/components/ui/UMBreadCrumb';
+import {
+  useUpdateuserMutation,
+  useUserIdQuery,
+} from '@/redux/api/adminApi/userApi';
+import { getUserInfo } from '@/services/auth.service';
+import { Button, message } from 'antd';
 
 export default function AdminPage() {
   const { userId } = getUserInfo() as any;
   const { data } = useUserIdQuery(userId);
   const id = data?.id;
   console.log(data);
-    const [updateUser] = useUpdateuserMutation();
+  const [updateUser] = useUpdateuserMutation();
 
-    const defaultValues = {
-      name: data?.name || '',
-      email: data?.email || '',
-      contactNo: data?.contactNo || '',
-      address: data?.address || '',
-      image: data?.image || '',
-    };
+  const defaultValues = {
+    name: data?.name || '',
+    email: data?.email || '',
+    contactNo: data?.contactNo || '',
+    address: data?.address || '',
+    image: data?.image || '',
+  };
 
-    const onSubmit = async (datas: any) => {
-      message.loading('Updating.....');
-      try {
-        console.log('given', datas);
-        const res = await updateUser({ id , body: datas });
-        console.log(res);
-        message.success('Department added successfully');
-      } catch (err: any) {
-        console.error(err.message);
-        message.error(err.message);
-      }
-    };
-    const base = 'admin';
+  const onSubmit = async (datas: any) => {
+    message.loading('Updating.....');
+    try {
+      console.log('given', datas);
+      const res = await updateUser({ id, body: datas });
+      console.log(res);
+      message.success('Department added successfully');
+    } catch (err: any) {
+      console.error(err.message);
+      message.error(err.message);
+    }
+  };
+  const base = 'admin';
   return (
     <div>
       <div>
