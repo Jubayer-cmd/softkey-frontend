@@ -25,7 +25,7 @@ function NavbarPage() {
     dispatch(removeFromCart(itemId));
   };
   return (
-    <>
+    <div className="mx-auto max-w-screen-xl">
       <div className="flex flex-wrap place-items-center">
         <section className="relative mx-auto">
           {/* navbar */}
@@ -314,7 +314,7 @@ function NavbarPage() {
           </div>
         </section>
       </Drawer>
-    </>
+    </div>
   );
 }
 

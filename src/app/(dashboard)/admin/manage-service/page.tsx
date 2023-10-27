@@ -1,36 +1,37 @@
-"use client";
-import UMTable from "@/components/ui/UMTable";
-import { useAllServicesQuery, useDeleteserviceMutation } from "@/redux/api/adminApi/serviceApi";
+'use client';
+import UMTable from '@/components/ui/UMTable';
 import {
-  DeleteOutlined,
-  EditOutlined
-} from '@ant-design/icons';
-import { Button, message } from "antd";
-import Link from "next/link";
+  useAllServicesQuery,
+  useDeleteserviceMutation,
+} from '@/redux/api/adminApi/serviceApi';
+import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
+import { Button, message } from 'antd';
+import Link from 'next/link';
 function ServicePage() {
-    const query: Record<string, any> = {};
+  const query: Record<string, any> = {};
   const { data, isLoading } = useAllServicesQuery(query);
-  console.log("fuck",data);
-  const [deleteService ] = useDeleteserviceMutation();
-   const columns = [
+  console.log('fuck', data);
+  const [deleteService] = useDeleteserviceMutation();
+  const columns = [
     {
-      title: "name",
-      dataIndex: "name",
+      title: 'name',
+      dataIndex: 'name',
     },
     {
-      title: "description",
-      dataIndex: "description",
+      title: 'description',
+      dataIndex: 'description',
     },
     {
-      title: "Action",
+      title: 'Action',
       render: function (data: any) {
         return (
           <>
-            <Link href={`/super_admin/department/edit/${data?.id}`}>
+            <Link href={`/admin/manage-service/edit/${data?.id}`}>
               <Button
                 style={{
-                  margin: "0px 5px",
+                  margin: '0px 5px',
                 }}
+                className='bg-blue-500'
                 onClick={() => console.log(data)}
                 type="primary"
               >
@@ -50,12 +51,12 @@ function ServicePage() {
     },
   ];
 
-    const deleteHandler = async (id: string) => {
-    message.loading("Deleting.....");
+  const deleteHandler = async (id: string) => {
+    message.loading('Deleting.....');
     try {
       //   console.log(data);
       await deleteService(id);
-      message.success("Department Deleted successfully");
+      message.success('Department Deleted successfully');
     } catch (err: any) {
       //   console.error(err.message);
       message.error(err.message);
@@ -79,4 +80,4 @@ function ServicePage() {
   );
 }
 
-export default ServicePage
+export default ServicePage;

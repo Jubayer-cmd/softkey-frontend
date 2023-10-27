@@ -10,24 +10,20 @@ export default function ServiceList() {
         <h1>Our Service</h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {data?.map((item, index) => (
-            <div
-              key={index}
-              className="group relative block w-full transform transition-transform hover:translate-y-[-5px] hover:bg-white"
-              style={{
-                backgroundImage: `url(${item.image})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-              }}
-            >
-              <div className="relative flex flex-col justify-end h-72 sm:h-80 lg:h-96 p-4 sm:p-6 lg:p-8 bg-opacity-90 bg-black hover:bg-opacity-0 transition-all">
-                <h2 className="text-xl font-medium sm:text-2xl text-white">
-                  {item.name}
-                </h2>
-                <p className="text-sm sm:text-base text-white mt-2">
-                  {item.description}
-                </p>
-                <p className="mt-4 font-bold text-white">Read more</p>
-              </div>
+            <div className="block" key={index}>
+              <img
+                alt= {item?.name}
+                src={item?.image}
+                className="h-48 w-full object-cover sm:h-80 lg:h-96"
+              />
+
+              <h3 className="mt-4 text-lg font-bold text-gray-900 sm:text-xl">
+                {item?.name}
+              </h3>
+
+              <p className="mt-2 max-w-sm text-gray-700">
+                {item?.description}
+              </p>
             </div>
           ))}
         </div>

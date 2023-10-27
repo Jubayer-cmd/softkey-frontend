@@ -3,28 +3,34 @@ import Form from '@/components/Froms/Form';
 import FormInput from '@/components/Froms/FormInput';
 import FormTextArea from '@/components/Froms/FormTextArea';
 import UMBreadCrumb from '@/components/ui/UMBreadCrumb';
-import { useAddblogMutation } from '@/redux/api/adminApi/blogApi';
-import { getUserInfo } from '@/services/auth.service';
-
+import {
+  useBlogIdQuery,
+  useUpdateblogMutation,
+} from '@/redux/api/adminApi/blogApi';
 import { Button, message } from 'antd';
 
-function CreateBlogsPage() {
-const [addBlogs, { isLoading, error, isSuccess }] = useAddblogMutation();
-const { userId } = getUserInfo() as any;
-console.log(userId);
-    const onSubmit = async (data: any) => {
-      message.loading('Creating.....');
-      try {
-        data.authorId=userId;
-        console.log(data);
-        const res = await addBlogs(data).unwrap();
-        console.log(res);
-        message.success('Blogs added successfully');
-      } catch (err: any) {
-        console.error(err.message);
-      }
-    };
-    const base = 'admin';
+export default function EditBlogPage({ params }: { params: { id: string } }) {
+  const { data } = useBlogIdQuery(params?.id);
+  const defaultValues = {
+    authorName: data?.authorName || '',
+    content: data?.content || '',
+    title: data?.title || '',
+    image: data?.image || '',
+  };
+  const [updateBlogs] = useUpdateblogMutation();
+  console.log(data);
+  const onSubmit = async (data: any) => {
+    message.loading('Creating.....');
+    try {
+      console.log(data);
+      const res = await updateBlogs(data);
+      console.log(res);
+      message.success('Blogs added successfully');
+    } catch (err: any) {
+      console.error(err.message);
+    }
+  };
+  const base = 'admin';
   return (
     <div>
       <UMBreadCrumb
@@ -33,10 +39,10 @@ console.log(userId);
           { label: 'manage-blog', link: `/${base}/manage-blog` },
         ]}
       />
-      <h1 className="text-3xl my-3 font-bold pl-4">Create Blogs</h1>
-      <Form submitHandler={onSubmit}>
+      <h1 className="text-3xl my-3 font-bold pl-4">Update Blogs</h1>
+      <Form submitHandler={onSubmit} defaultValues={defaultValues}>
         <div className="grid grid-cols-1 gap-2">
-                <div className="w-full sm:col-span-2 xl:col-span-1 px-4">
+          <div className="w-full sm:col-span-2 xl:col-span-1 px-4">
             <FormInput name="authorName" label="Author Name" />
           </div>
           <div className="w-full sm:col-span-2 xl:col-span-1 px-4">
@@ -48,7 +54,6 @@ console.log(userId);
           <div className="w-full sm:col-span-2 xl:col-span-1 px-4">
             <FormInput name="image" label="Image" />
           </div>
-    
         </div>
 
         <Button
@@ -56,11 +61,9 @@ console.log(userId);
           type="primary"
           htmlType="submit"
         >
-          add
+          Update Blogs
         </Button>
       </Form>
     </div>
   );
 }
-
-export default CreateBlogsPage;
