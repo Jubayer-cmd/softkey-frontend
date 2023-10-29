@@ -1,9 +1,7 @@
 'use client';
-import Form from '@/components/Froms/Form';
-import FormInput from '@/components/Froms/FormInput';
-import FormTextArea from '@/components/Froms/FormTextArea';
+
 import { SelectOptions } from '@/components/froms/FormMultiSelectField';
-import FormSelectField from '@/components/froms/FormSelectField';
+
 import UMBreadCrumb from '@/components/ui/UMBreadCrumb';
 import { useAllcategorysQuery } from '@/redux/api/adminApi/categoryApi';
 import {
@@ -11,6 +9,10 @@ import {
   useUpdateproductMutation,
 } from '@/redux/api/adminApi/productApi';
 import { Button, message } from 'antd';
+import Form from './../../../../../../components/froms/Form';
+import FormInput from './../../../../../../components/froms/FormInput';
+import FormSelectField from './../../../../../../components/froms/FormSelectField';
+import FormTextArea from './../../../../../../components/froms/FormTextArea';
 
 export default function UpdateProduct({ params }: { params: { id: string } }) {
   const { data } = useProductIdQuery(params?.id);
@@ -38,12 +40,14 @@ export default function UpdateProduct({ params }: { params: { id: string } }) {
       message.error(err.message);
     }
   };
-  const categoryOptions = categoryID?.map((category) => {
-    return {
-      label: category?.name,
-      value: category?.id,
-    };
-  });
+  const categoryOptions = categoryID?.map(
+    (category: { name: string; id: number }) => {
+      return {
+        label: category?.name,
+        value: category?.id,
+      };
+    }
+  );
   const base = 'admin';
   return (
     <div>

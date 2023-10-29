@@ -1,17 +1,17 @@
 'use client';
 
-import Form from '@/components/Froms/Form';
-import FormInput from '@/components/Froms/FormInput';
-import FormTextArea from '@/components/Froms/FormTextArea';
 import { SelectOptions } from '@/components/froms/FormMultiSelectField';
 import FormSelectField from '@/components/froms/FormSelectField';
 import UMBreadCrumb from '@/components/ui/UMBreadCrumb';
 import { useAllcategorysQuery } from '@/redux/api/adminApi/categoryApi';
 import { useAddproductMutation } from '@/redux/api/adminApi/productApi';
 import { Button, message } from 'antd';
+import Form from './../../../../../components/froms/Form';
+import FormInput from './../../../../../components/froms/FormInput';
+import FormTextArea from './../../../../../components/froms/FormTextArea';
 
 function CreateProducts() {
-    const { data, isLoading } = useAllcategorysQuery({});
+  const { data, isLoading } = useAllcategorysQuery({});
   const [createProduct] = useAddproductMutation();
   const onSubmit = async (data: any) => {
     message.loading('Creating.....');
@@ -25,8 +25,8 @@ function CreateProducts() {
       message.error(err.message);
     }
   };
-    const categoryOptions = data?.map(
-    (category) => {
+  const categoryOptions = data?.map(
+    (category: { name: string; id: number }) => {
       return {
         label: category?.name,
         value: category?.id,

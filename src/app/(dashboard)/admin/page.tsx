@@ -1,6 +1,5 @@
 'use client';
-import Form from '@/components/Froms/Form';
-import FormInput from '@/components/Froms/FormInput';
+
 import UMBreadCrumb from '@/components/ui/UMBreadCrumb';
 import {
   useUpdateuserMutation,
@@ -8,6 +7,8 @@ import {
 } from '@/redux/api/adminApi/userApi';
 import { getUserInfo } from '@/services/auth.service';
 import { Button, message } from 'antd';
+import Form from './../../../components/froms/Form';
+import FormInput from './../../../components/froms/FormInput';
 
 export default function AdminPage() {
   const { userId } = getUserInfo() as any;

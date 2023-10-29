@@ -2,9 +2,12 @@
 import { removeFromCart, updateQuantity } from '@/redux/api/cartApi/cartApi';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { Drawer } from 'antd';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-
+import { FaBars, FaBookOpen, FaShoppingCart, FaTimes } from 'react-icons/fa';
 function NavbarPage() {
+  const router = useRouter();
   const cartItems = useAppSelector((state) => state.cart.items);
   const totalSum = useAppSelector((state) => state.cart.totalSum);
   const [open, setOpen] = useState(false);
@@ -17,15 +20,67 @@ function NavbarPage() {
     setOpen(false);
   };
   const dispatch = useAppDispatch();
-  const handleUpdateQuantity = (itemId, quantity) => {
+  const handleUpdateQuantity = (itemId: any, quantity: number) => {
     dispatch(updateQuantity({ id: itemId, quantity }));
   };
 
-  const handleRemoveFromCart = (itemId) => {
+  const handleRemoveFromCart = (itemId: any) => {
     dispatch(removeFromCart(itemId));
   };
+  let Links = [
+    { name: 'HOME', link: '/home' },
+    { name: 'SERVICE', link: '/' },
+    { name: 'ABOUT', link: '/' },
+    { name: 'CONTACT', link: '/' },
+  ];
+  let [toogle, setToggle] = useState(false);
+
   return (
-    <div>
+    <div className="mb-20 ">
+      <div className="shadow-md w-full fixed top-0 left-0 z-10">
+        <div className="md:flex items-center justify-between bg-white py-4 md:px-10 px-7">
+          {/* logo section */}
+          <div className="font-bold text-2xl cursor-pointer flex items-center gap-1">
+            <FaBookOpen className="w-7 h-7 text-blue-600" />
+            <span>Soft-key</span>
+          </div>
+          <div
+            onClick={() => setToggle(!toogle)}
+            className="absolute right-8 top-6 cursor-pointer md:hidden w-7 h-7"
+          >
+            {toogle ? <FaTimes /> : <FaBars />}
+          </div>
+          {/* link items */}
+          <ul
+            className={`md:flex md:items-center md:pb-0 pb-12 absolute md:static bg-white md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${
+              toogle ? 'top-12' : 'top-[-490px]'
+            }`}
+          >
+            {Links.map((link, index) => (
+              <li key={index} className="md:ml-8 md:my-0 my-7 font-semibold">
+                <Link
+                  href={link.link}
+                  className="text-gray-800 hover:text-blue-400 duration-500"
+                >
+                  {link.name}
+                </Link>
+              </li>
+            ))}
+            <FaShoppingCart
+              onClick={showDrawer}
+              className="w-7 h-7 cursor-pointer md:ml-20 hover:text-blue-500"
+            />
+            <button
+              onClick={() => {
+                router.push('/login');
+              }}
+              className="btn bg-blue-600 text-white md:ml-8 font-semibold px-3 py-1 rounded duration-500 md:static"
+            >
+              Login / Register
+            </button>
+          </ul>
+        </div>
+      </div>
       <Drawer title="YOUR CART" placement="right" onClose={onClose} open={open}>
         <section>
           <div className="mx-auto max-w-screen-xl px-1 py-2 sm:px-6 sm:py-12 lg:px-2">

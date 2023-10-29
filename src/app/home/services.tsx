@@ -1,12 +1,13 @@
 'use client';
-import Form from '@/components/Froms/Form';
-import FormDatePicker from '@/components/Froms/FormDatePicker';
-import FormTimePicker from '@/components/Froms/FormTimePicker';
+
 import ReusableModal from '@/components/ui/ReusableModal';
 import { useAllServicesQuery } from '@/redux/api/adminApi/serviceApi';
 import { Button, message } from 'antd';
 import dayjs from 'dayjs';
 import { useState } from 'react';
+import Form from './../../components/froms/Form';
+import FormDatePicker from './../../components/froms/FormDatePicker';
+import FormTimePicker from './../../components/froms/FormTimePicker';
 
 export default function ServiceList() {
   const { data } = useAllServicesQuery({});
@@ -42,7 +43,7 @@ export default function ServiceList() {
       <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
         <h1>Our Service</h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {data?.map((item, index) => (
+          {data?.map((item: any, index: number) => (
             <div
               className="block rounded p-4 transition duration-300 ease-in-out transform hover:shadow-lg hover:border-b-4 hover:border-gray-800 hover:scale-102"
               key={index}
