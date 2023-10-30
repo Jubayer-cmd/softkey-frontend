@@ -1,7 +1,9 @@
 'use client';
 
 import ReusableModal from '@/components/ui/ReusableModal';
+import { useAddbookingMutation } from '@/redux/api/adminApi/bookingApi';
 import { useAllServicesQuery } from '@/redux/api/adminApi/serviceApi';
+import { getUserInfo, isLoggedIn } from '@/services/auth.service';
 import { Button, message } from 'antd';
 import dayjs from 'dayjs';
 import { useState } from 'react';
@@ -10,29 +12,42 @@ import FormDatePicker from './../../components/froms/FormDatePicker';
 import FormTimePicker from './../../components/froms/FormTimePicker';
 
 export default function ServiceList() {
-  const { data } = useAllServicesQuery({});
-  console.log(data);
+  const { data: services } = useAllServicesQuery({});
+  console.log(services);
+  const [addBooking] = useAddbookingMutation();
+  const { userId } = getUserInfo() as any;
+  console.log(userId);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const isUserLoggedIn = true;
-
-  const openModal = () => {
+  const isUserLoggedIn = isLoggedIn();
+  const [selectedService, setSelectedService] = useState({} as any);
+  const openModal = (serviceID: string) => {
     setIsModalOpen(true);
+    setSelectedService(serviceID);
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
   };
   const onSubmit = async (data: any) => {
-    message.loading('Creating.....');
+    message.loading('Booking.....');
     try {
       const dateTime = dayjs(
         `${data.date} ${data.time}`,
         'YYYY-MM-DD HH:mm'
-      ).format('YYYY-MM-DD HH:mm:ss');
-      console.log(dateTime);
-      // const res = await updateProduct(data).unwrap();
-      //console.log(res);
-      message.success('Department added successfully');
+      ).toISOString();
+      data.serviceId = selectedService;
+      data.date = dateTime;
+      data.status = 'pending';
+      data.userId = userId;
+      // Remove the 'time' property from the data object
+      delete data.time;
+      console.log('check data', data);
+      const res = await addBooking(data).unwrap();
+      console.log(res);
+      if (typeof res === 'object' && res.hasOwnProperty('id')) {
+        closeModal();
+        message.success('Successfully Booked!');
+      }
     } catch (err: any) {
       console.error(err.message);
       message.error(err.message);
@@ -43,7 +58,7 @@ export default function ServiceList() {
       <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
         <h1>Our Service</h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {data?.map((item: any, index: number) => (
+          {services?.map((item: any, index: number) => (
             <div
               className="block rounded p-4 transition duration-300 ease-in-out transform hover:shadow-lg hover:border-b-4 hover:border-gray-800 hover:scale-102"
               key={index}
@@ -64,7 +79,7 @@ export default function ServiceList() {
                 <button
                   className="fancy"
                   onClick={() => {
-                    openModal();
+                    openModal(item.id);
                   }}
                 >
                   <span className="top-key"></span>
@@ -102,7 +117,7 @@ export default function ServiceList() {
             </div>
           ) : (
             /* User is not logged in, show login prompt */
-            <p>Please log in to continue.</p>
+            <p className="my-4 text-xl">Please log in to continue.</p>
           )}
         </ReusableModal>
       </div>

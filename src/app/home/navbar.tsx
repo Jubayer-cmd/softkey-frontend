@@ -1,13 +1,22 @@
 'use client';
 import { removeFromCart, updateQuantity } from '@/redux/api/cartApi/cartApi';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { Drawer } from 'antd';
+import { isLoggedIn, removeUserInfo } from '@/services/auth.service';
+import { Avatar, Button, Drawer, Dropdown, Menu } from 'antd';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { FaBars, FaBookOpen, FaShoppingCart, FaTimes } from 'react-icons/fa';
+import {
+  FaBars,
+  FaBookOpen,
+  FaShoppingCart,
+  FaTimes,
+  FaUser,
+} from 'react-icons/fa';
+import { authKey } from './../../constants/storageKey';
 function NavbarPage() {
   const router = useRouter();
+  const userLoggedIn = isLoggedIn();
   const cartItems = useAppSelector((state) => state.cart.items);
   const totalSum = useAppSelector((state) => state.cart.totalSum);
   const [open, setOpen] = useState(false);
@@ -35,6 +44,33 @@ function NavbarPage() {
   ];
   let [toogle, setToggle] = useState(false);
 
+  const logOut = () => {
+    removeUserInfo(authKey);
+    router.push('/');
+  };
+  const items = [
+    {
+      key: '0',
+      label: (
+        <Button
+          type="text"
+          onClick={() => {
+            router.push('/profile');
+          }}
+        >
+          Profile
+        </Button>
+      ),
+    },
+    {
+      key: '1',
+      label: (
+        <Button type="text" danger onClick={logOut}>
+          Logout
+        </Button>
+      ),
+    },
+  ];
   return (
     <div className="mb-20 ">
       <div className="shadow-md w-full fixed top-0 left-0 z-10">
@@ -70,14 +106,24 @@ function NavbarPage() {
               onClick={showDrawer}
               className="w-7 h-7 cursor-pointer md:ml-20 hover:text-blue-500"
             />
-            <button
-              onClick={() => {
-                router.push('/login');
-              }}
-              className="btn bg-blue-600 text-white md:ml-8 font-semibold px-3 py-1 rounded duration-500 md:static"
-            >
-              Login / Register
-            </button>
+            {userLoggedIn ? (
+              <Dropdown overlay={<Menu items={items} />}>  
+                  <Avatar
+                    className="md:ml-8 px-3 py-1"
+                    size="large"
+                    icon={<FaUser />}
+                  />     
+              </Dropdown>
+            ) : (
+              <button
+                onClick={() => {
+                  router.push('/login');
+                }}
+                className="btn bg-blue-600 text-white md:ml-8 font-semibold px-3 py-1 rounded duration-500 md:static"
+              >
+                Login / Register
+              </button>
+            )}
           </ul>
         </div>
       </div>
