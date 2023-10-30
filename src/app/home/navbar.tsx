@@ -76,7 +76,12 @@ function NavbarPage() {
       <div className="shadow-md w-full fixed top-0 left-0 z-10">
         <div className="md:flex items-center justify-between bg-white py-4 md:px-10 px-7">
           {/* logo section */}
-          <div className="font-bold text-2xl cursor-pointer flex items-center gap-1">
+          <div
+            onClick={() => {
+              router.push('/');
+            }}
+            className="font-bold text-2xl cursor-pointer flex items-center gap-1"
+          >
             <FaBookOpen className="w-7 h-7 text-blue-600" />
             <span>Soft-key</span>
           </div>
@@ -107,12 +112,12 @@ function NavbarPage() {
               className="w-7 h-7 cursor-pointer md:ml-20 hover:text-blue-500"
             />
             {userLoggedIn ? (
-              <Dropdown overlay={<Menu items={items} />}>  
-                  <Avatar
-                    className="md:ml-8 px-3 py-1"
-                    size="large"
-                    icon={<FaUser />}
-                  />     
+              <Dropdown overlay={<Menu items={items} />}>
+                <Avatar
+                  className="md:ml-8 px-3 py-1"
+                  size="large"
+                  icon={<FaUser />}
+                />
               </Dropdown>
             ) : (
               <button
@@ -275,12 +280,12 @@ function NavbarPage() {
                     </div>
 
                     <div className="flex justify-end">
-                      <a
-                        href="#"
+                      <Link
+                        href="/checkout"
                         className="block rounded bg-gray-700 px-5 py-3 text-sm text-gray-100 transition hover:bg-gray-600"
                       >
                         Checkout
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>
