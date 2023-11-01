@@ -31,6 +31,13 @@ export const userApi = baseApi.injectEndpoints({
       }),
       providesTags: [tagTypes.user],
     }),
+    userToAdmin: build.mutation({
+      query: (id) => ({
+        url: `${user_URL}/admin/${id}`,
+        method: 'PATCH',
+      }),
+      invalidatesTags: [tagTypes.user],
+    }),
     // update
     updateuser: build.mutation({
       query: (data) => ({
@@ -56,4 +63,5 @@ export const {
   useUserIdQuery,
   useDeleteuserMutation,
   useUpdateuserMutation,
+  useUserToAdminMutation,
 } = userApi;

@@ -1,44 +1,40 @@
 'use client';
 import UMTable from '@/components/ui/UMTable';
-import { useUserOrderIdQuery } from '@/redux/api/orderApi/orderApi';
+import { useUserbookingByIdQuery } from '@/redux/api/adminApi/bookingApi';
 import { getUserInfo } from '@/services/auth.service';
 import { Button } from 'antd';
 import dayjs from 'dayjs';
 
 export default function BookingPage() {
   const { userId } = getUserInfo() as any;
-  const { data, isLoading } = useUserOrderIdQuery(userId);
+  const { data, isLoading } = useUserbookingByIdQuery(userId);
   console.log('fuck', data);
   const columns = [
     {
-      title: 'Product',
-      dataIndex: 'orderProduct',
+      title: 'User',
+      dataIndex: 'userId',
       render: function (data: any, record: any) {
-        if (record.orderProduct) {
-          const productDetails = record.orderProduct.map((product: any) => {
-            return `${product.product.name} (Q: ${product.quantity})`;
-          });
-          return productDetails.join(', '); // Display all product details as a comma-separated list, adjust formatting as needed
-        } else {
-          return 'N/A';
-        }
+        // Access the category name from the Category object
+        const UserEmail = record.user?.email || 'User Not Found';
+        return UserEmail;
       },
     },
     {
-      title: 'Phone',
-      dataIndex: 'phone',
+      title: 'Service Name',
+      dataIndex: 'serviceId',
+      render: function (data: any, record: any) {
+        // Access the category name from the Category object
+        const UserEmail = record.service?.name || 'Service Not Found';
+        return UserEmail;
+      },
     },
     {
-      title: 'Address',
-      dataIndex: 'address',
+      title: 'Status',
+      dataIndex: 'status',
     },
     {
-      title: 'Amount',
-      dataIndex: 'totalAmount',
-    },
-    {
-      title: 'Order Date',
-      dataIndex: 'createdAt',
+      title: 'Schedule Date',
+      dataIndex: 'date',
       render: function (data: any) {
         return data && dayjs(data).format('MMM D, YYYY hh:mm A');
       },

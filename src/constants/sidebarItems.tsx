@@ -127,13 +127,14 @@ export const sidebarItems = (role: string) => {
   ];
 
   const superAdminSidebarItems: MenuProps['items'] = [
-    ...defaultSidebarItems,
-    ...commonAdminSidebarItems,
-    {
-      label: <Link href={`/${role}/admin`}>Manage Admin</Link>,
+      ...defaultSidebarItems,
+      {
+      label: <Link href={`/${role}/manage-admin`}>Manage Admin</Link>,
       icon: <TableOutlined />,
-      key: `/${role}/admin`,
+      key: `/${role}/manage-admin`,
     },
+    ...commonAdminSidebarItems,
+  
   ];
 
   const userSidebarItems: MenuProps['items'] = [
