@@ -61,10 +61,8 @@ export const bookingApi = baseApi.injectEndpoints({
 
 export const {
   useAllbookingsQuery,
- useuserbookingByIdQuery,
   useAddbookingMutation,
   useUpdatebookingMutation,
   useDeletebookingMutation,
   useBookingIdQuery,
-
 } = bookingApi;
