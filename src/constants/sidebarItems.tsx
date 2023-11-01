@@ -1,20 +1,12 @@
-import {
-  AppstoreOutlined,
-  CreditCardOutlined,
-  FileTextOutlined,
-  ProfileOutlined,
-  ScheduleOutlined,
-  TableOutlined,
-  ThunderboltOutlined,
-} from "@ant-design/icons";
-import type { MenuProps } from "antd";
-import Link from "next/link";
-import { USER_ROLE } from "./role";
+import { ProfileOutlined, TableOutlined } from '@ant-design/icons';
+import type { MenuProps } from 'antd';
+import Link from 'next/link';
+import { USER_ROLE } from './role';
 export const sidebarItems = (role: string) => {
-  const defaultSidebarItems: MenuProps["items"] = [
+  const defaultSidebarItems: MenuProps['items'] = [
     {
-      label: "Profile",
-      key: "profile",
+      label: 'Profile',
+      key: 'profile',
       icon: <ProfileOutlined />,
       children: [
         {
@@ -67,7 +59,7 @@ export const sidebarItems = (role: string) => {
     },
   ];
 
-  const adminSidebarItems: MenuProps["items"] = [
+  const adminSidebarItems: MenuProps['items'] = [
     ...defaultSidebarItems,
     ...commonAdminSidebarItems,
     // {
@@ -134,7 +126,7 @@ export const sidebarItems = (role: string) => {
     // },
   ];
 
-  const superAdminSidebarItems: MenuProps["items"] = [
+  const superAdminSidebarItems: MenuProps['items'] = [
     ...defaultSidebarItems,
     ...commonAdminSidebarItems,
     {
@@ -142,66 +134,25 @@ export const sidebarItems = (role: string) => {
       icon: <TableOutlined />,
       key: `/${role}/admin`,
     },
-    {
-      label: <Link href={`/${role}/user`}>Manage User</Link>,
-      icon: <TableOutlined />,
-      key: `/${role}/user`,
-    },
-    {
-      label: "Management",
-      key: "management",
-      icon: <AppstoreOutlined />,
-      children: [
-        {
-          label: <Link href={`/${role}/department`}>Department</Link>,
-          key: `/${role}/department`,
-        },
-      ],
-    },
   ];
 
-  const facultySidebarItems: MenuProps["items"] = [
+  const userSidebarItems: MenuProps['items'] = [
     ...defaultSidebarItems,
     {
-      label: <Link href={`/${role}/courses`}>Courses</Link>,
+      label: <Link href={`/${role}/orders`}>Orders</Link>,
       icon: <TableOutlined />,
-      key: `/${role}/courses`,
+      key: `/${role}/orders`,
     },
-  ];
-
-  const studentSidebarItems: MenuProps["items"] = [
-    ...defaultSidebarItems,
     {
-      label: <Link href={`/${role}/courses`}>Courses</Link>,
+      label: <Link href={`/${role}/booking`}>Booking</Link>,
       icon: <TableOutlined />,
-      key: `/${role}/courses`,
-    },
-    {
-      label: <Link href={`/${role}/courses/schedule`}>Course schedules</Link>,
-      icon: <ScheduleOutlined />,
-      key: `/${role}/courses/schedule`,
-    },
-    {
-      label: <Link href={`/${role}/registration`}>Registration</Link>,
-      icon: <ThunderboltOutlined />,
-      key: `/${role}/registration`,
-    },
-    {
-      label: <Link href={`/${role}/payment`}>Payment</Link>,
-      icon: <CreditCardOutlined />,
-      key: `/${role}/payment`,
-    },
-    {
-      label: <Link href={`/${role}/academic-report`}>Academic report</Link>,
-      icon: <FileTextOutlined />,
-      key: `/${role}/academic-report`,
+      key: `/${role}/booking`,
     },
   ];
 
   if (role === USER_ROLE.SUPER_ADMIN) return superAdminSidebarItems;
   else if (role === USER_ROLE.ADMIN) return adminSidebarItems;
-  else if (role === USER_ROLE.FACULTY) return facultySidebarItems;
-  else if (role === USER_ROLE.STUDENT) return studentSidebarItems;
+  else if (role === USER_ROLE.USER) return userSidebarItems;
   else {
     return defaultSidebarItems;
   }

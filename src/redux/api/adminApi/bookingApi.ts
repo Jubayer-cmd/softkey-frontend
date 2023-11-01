@@ -22,6 +22,14 @@ export const bookingApi = baseApi.injectEndpoints({
       }),
       providesTags: [tagTypes.booking],
     }),
+
+    userbookingById: build.query({
+      query: (id: string | string[] | undefined) => ({
+        url: `${booking_URL}/user/${id}`,
+        method: 'GET',
+      }),
+      providesTags: [tagTypes.booking],
+    }),
     // create a new booking
     addbooking: build.mutation({
       query: (data) => ({
@@ -53,8 +61,10 @@ export const bookingApi = baseApi.injectEndpoints({
 
 export const {
   useAllbookingsQuery,
+ useuserbookingByIdQuery,
   useAddbookingMutation,
   useUpdatebookingMutation,
   useDeletebookingMutation,
   useBookingIdQuery,
+
 } = bookingApi;

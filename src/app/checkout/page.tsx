@@ -1,23 +1,35 @@
 'use client';
+import { useAddorderMutation } from '@/redux/api/orderApi/orderApi';
 import { useAppSelector } from '@/redux/hooks';
 import { getUserInfo } from '@/services/auth.service';
+import { message } from 'antd';
+import { useRouter } from 'next/navigation';
 import { Controller, useForm } from 'react-hook-form';
 import Footer from '../home/footer';
 import NavbarPage from './../home/navbar';
 
 const CheckoutPage = () => {
+  const router = useRouter();
   const { control, handleSubmit } = useForm();
+  const [addOrder] = useAddorderMutation();
   const cartItems = useAppSelector((state) => state.cart.items);
   const totalSum = useAppSelector((state) => state.cart.totalSum);
-  const { userId } = getUserInfo() as string;
-  const orderProducts = cartItems.map((cartItem) => ({
+  const { userId } = getUserInfo() as any;
+  const orderProduct: any[] = cartItems.map((cartItem) => ({
     productId: cartItem.id,
     quantity: cartItem.quantity,
   }));
-  const onSubmit = (data) => {
+  const totalAmount = totalSum + 60;
+  const onSubmit = async (data: any) => {
     data.userId = userId;
-    data.orderProducts = orderProducts;
-    console.log(data);
+    data.orderProduct = orderProduct;
+    data.totalAmount = totalAmount;
+    data.status = 'pending';
+    const res = await addOrder(data).unwrap();
+    if (res.id) {
+      message.success('Order placed successfully');
+      router.push('/');
+    }
   };
 
   return (
@@ -141,8 +153,8 @@ const CheckoutPage = () => {
                         <textarea
                           {...field}
                           className="w-full px-4 py-3 text-xs border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600"
-                          cols="20"
-                          rows="4"
+                          cols={parseInt('20')}
+                          rows={parseInt('4')}
                           placeholder="Address"
                         />
                       )}
@@ -227,7 +239,7 @@ const CheckoutPage = () => {
                       <textarea
                         {...field}
                         className="flex items-center w-full px-4 py-3 text-sm border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-600"
-                        rows="4"
+                        rows={parseInt('4')}
                         placeholder="Notes for delivery"
                       />
                     )}
