@@ -48,14 +48,18 @@ export const orderApi = baseApi.injectEndpoints({
       invalidatesTags: [tagTypes.order],
     }),
     // update
-    updateorder: build.mutation({
-      query: (data) => ({
-        url: `${order_URL}/${data.id}`,
-        method: 'PATCH',
-        data: data.body,
-      }),
-      invalidatesTags: [tagTypes.order],
-    }),
+updateorder: build.mutation({
+  query: (data) => {
+    console.log("LOL:", data); // Add this line to log the data
+    return {
+      url: `${order_URL}/${data.id}`,
+      method: 'PATCH',
+      data: data.body,
+    };
+  },
+  invalidatesTags: [tagTypes.order],
+}),
+
     // delete
     deleteorder: build.mutation({
       query: (id) => ({

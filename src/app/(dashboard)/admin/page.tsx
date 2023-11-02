@@ -31,7 +31,7 @@ export default function AdminPage() {
       console.log('given', datas);
       const res = await updateUser({ id, body: datas });
       console.log(res);
-      message.success('Department added successfully');
+      message.success('User Updated successfully');
     } catch (err: any) {
       console.error(err.message);
       message.error(err.message);

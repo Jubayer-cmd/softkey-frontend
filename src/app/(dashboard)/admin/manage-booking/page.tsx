@@ -1,17 +1,28 @@
-"use client";
-import UMTable from "@/components/ui/UMTable";
-import { useAllbookingsQuery, useDeletebookingMutation } from "@/redux/api/adminApi/bookingApi";
+'use client';
+import UMTable from '@/components/ui/UMTable';
 import {
-  DeleteOutlined
-} from '@ant-design/icons';
-import { Button, message } from "antd";
+  useAllbookingsQuery,
+  useDeletebookingMutation,
+  useUpdatebookingMutation,
+} from '@/redux/api/adminApi/bookingApi';
+import { Button, Select, message } from 'antd';
 import dayjs from 'dayjs';
-import Link from "next/link";
+import Link from 'next/link';
+enum BookingStatus {
+  pending = 'pending',
+  confirmed = 'confirmed',
+  completed = 'completed',
+  canceled = 'canceled',
+}
 function BookingPage() {
   const query: Record<string, any> = {};
   const { data, isLoading } = useAllbookingsQuery(query);
   console.log('fuck', data);
+  const { Option } = Select;
+
+  const orderStatusOptions = Object.values(BookingStatus);
   const [deletebooking] = useDeletebookingMutation();
+  const [updateBooking] = useUpdatebookingMutation();
   const columns = [
     {
       title: 'User',
@@ -48,14 +59,31 @@ function BookingPage() {
     {
       title: 'Action',
       render: function (data: any) {
+        const handleStatusChange = async (selectedStatus: any) => {
+          const id = data?.id;
+          const updatedObject = {
+            id,
+            body: {
+              status: selectedStatus,
+            },
+          };
+          const res = await updateBooking(updatedObject).unwrap();
+          if (res.id) {
+            message.success('Booking status updated successfully');
+          }
+        };
+
         return (
           <>
-            <Button
-              onClick={() => deleteHandler(data?.id)}
-              type="primary"
-              danger
-            >
-              <DeleteOutlined />
+            <Select defaultValue={data.status} onChange={handleStatusChange}>
+              {orderStatusOptions.map((status) => (
+                <Option key={status} value={status}>
+                  {status}
+                </Option>
+              ))}
+            </Select>
+            <Button onClick={() => {}} type="primary" danger>
+              Cancel
             </Button>
           </>
         );
@@ -92,4 +120,4 @@ function BookingPage() {
   );
 }
 
-export default BookingPage
+export default BookingPage;

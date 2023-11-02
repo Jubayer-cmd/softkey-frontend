@@ -1,6 +1,9 @@
 'use client';
 import UMTable from '@/components/ui/UMTable';
-import { useAllblogsQuery, useDeleteblogMutation } from '@/redux/api/adminApi/blogApi';
+import {
+  useAllblogsQuery,
+  useDeleteblogMutation,
+} from '@/redux/api/adminApi/blogApi';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { Button, message } from 'antd';
 import Link from 'next/link';

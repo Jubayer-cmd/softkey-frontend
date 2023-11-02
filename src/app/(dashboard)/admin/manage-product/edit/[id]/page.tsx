@@ -1,7 +1,7 @@
 'use client';
 
 import { SelectOptions } from '@/components/froms/FormMultiSelectField';
-
+import FormSelectField from '@/components/froms/FormSelectField';
 import UMBreadCrumb from '@/components/ui/UMBreadCrumb';
 import { useAllcategorysQuery } from '@/redux/api/adminApi/categoryApi';
 import {
@@ -11,14 +11,13 @@ import {
 import { Button, message } from 'antd';
 import Form from './../../../../../../components/froms/Form';
 import FormInput from './../../../../../../components/froms/FormInput';
-import FormSelectField from './../../../../../../components/froms/FormSelectField';
 import FormTextArea from './../../../../../../components/froms/FormTextArea';
 
 export default function UpdateProduct({ params }: { params: { id: string } }) {
   const { data } = useProductIdQuery(params?.id);
+  console.log(data);
   const [updateProduct] = useUpdateproductMutation();
   const { data: categoryID, isLoading } = useAllcategorysQuery({});
-  console.log(data);
   const defaultValues = {
     name: data?.name || '',
     description: data?.description || '',
@@ -26,17 +25,20 @@ export default function UpdateProduct({ params }: { params: { id: string } }) {
     price: data?.price || '',
     stock: data?.stock || '',
     quantity: data?.quantity || '',
-    category: data?.category || '',
+    categoryId: data?.categoryId || '',
   };
-  const onSubmit = async (data: any) => {
-    message.loading('Creating.....');
+  const onSubmit = async (datas: any) => {
+    message.loading('Updating.....');
     try {
-      console.log(data);
-      const res = await updateProduct(data).unwrap();
-      console.log(res);
-      message.success('Department added successfully');
+      datas.price = parseInt(datas.price);
+      datas.quantity = parseInt(datas.quantity);
+      const id = data?.id;
+      const res = await updateProduct({ id, body: datas }).unwrap();
+      console.log('dssssss', res);
+      if ('id' in res) {
+        message.success('Product Updated successfully');
+      }
     } catch (err: any) {
-      console.error(err.message);
       message.error(err.message);
     }
   };
@@ -92,7 +94,7 @@ export default function UpdateProduct({ params }: { params: { id: string } }) {
           type="primary"
           htmlType="submit"
         >
-          add
+          Update
         </Button>
       </Form>
     </div>
