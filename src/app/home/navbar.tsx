@@ -1,6 +1,7 @@
 'use client';
+import { useProductsQuery } from '@/redux/api/adminApi/productApi';
 import { removeFromCart, updateQuantity } from '@/redux/api/cartApi/cartApi';
-import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { useAppDispatch, useAppSelector, useDebounced } from '@/redux/hooks';
 import { isLoggedIn, removeUserInfo } from '@/services/auth.service';
 import { Avatar, Button, Drawer, Dropdown, Menu } from 'antd';
 import Link from 'next/link';
@@ -14,9 +15,23 @@ import {
   FaUser,
 } from 'react-icons/fa';
 import { authKey } from './../../constants/storageKey';
+
 function NavbarPage() {
   const router = useRouter();
   const userLoggedIn = isLoggedIn();
+  const query: Record<string, any> = {};
+  const [searchTerm, setSearchTerm] = useState<string>('');
+  const debouncedTerm = useDebounced({
+    searchQuery: searchTerm,
+    delay: 600,
+  });
+if (debouncedTerm.length > 2) {
+  query['searchTerm'] = debouncedTerm;
+}
+  const { data, isLoading } = useProductsQuery({ ...query });
+
+  const products = data?.products;
+  const meta = data?.meta;
   const cartItems = useAppSelector((state) => state.cart.items);
   const totalSum = useAppSelector((state) => state.cart.totalSum);
   const [open, setOpen] = useState(false);
@@ -84,6 +99,28 @@ function NavbarPage() {
           >
             <FaBookOpen className="w-7 h-7 text-blue-600" />
             <span>Soft-key</span>
+          </div>
+          <div className="relative">
+            <input
+              type="text"
+              placeholder="Search products..."
+              value={searchTerm}
+              className="w-full p-3 rounded-2xl bg-slate-800"
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+            {isLoading ? (
+              <div>Loading...</div>
+            ) : (              
+               debouncedTerm.length > 2 && <div className="absolute top-16 p-4 bg-slate-800 text-white w-full rounded-xl left-1/2 -translate-x-1/2 flex flex-col gap-2">
+              <ul>
+                {products.length >0 ? products?.map((product: any) => (
+                  <li key={product.id}>
+                    <a onClick={() => {}}>{product.name}</a>
+                  </li>
+                )): <p>No Product Found</p>}
+              </ul>
+              </div>
+            )}           
           </div>
           <div
             onClick={() => setToggle(!toogle)}

@@ -1,4 +1,5 @@
 import CarouselPage from './carousel';
+import CollectionPage from './collection';
 import Footer from './footer';
 import Navbar from './navbar';
 import ProductsList from './products';
@@ -13,6 +14,7 @@ export default function HomePage() {
       <CarouselPage />
       <ProductsList />
       <ServiceList />
+      <CollectionPage />
       <SectionPage />
       <Testmonial />
       <Footer />

@@ -258,7 +258,7 @@ export default function ProductsList() {
           </div>
         </div>
 
-        <ul className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <ul className="mt-4 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
           {products?.map(
             (product: {
               id: Key | null | undefined;
@@ -290,7 +290,7 @@ export default function ProductsList() {
                   <img
                     src={product.image}
                     alt=""
-                    className="h-64 w-full object-cover transition duration-500 group-hover:scale-105 sm:h-72"
+                    className="h-48 w-full object-fill transition duration-500 group-hover:scale-105 sm:h-72"
                   />
 
                   <div className="relative border border-gray-100 bg-white p-6">
