@@ -7,6 +7,7 @@ import { useUserbookingByIdQuery } from '@/redux/api/adminApi/bookingApi';
 import { useAddreviewMutation } from '@/redux/api/adminApi/reviewApi';
 import { getUserInfo } from '@/services/auth.service';
 import { Rating } from '@smastrom/react-rating';
+import '@smastrom/react-rating/style.css';
 import { Button } from 'antd';
 import dayjs from 'dayjs';
 import { useState } from 'react';
