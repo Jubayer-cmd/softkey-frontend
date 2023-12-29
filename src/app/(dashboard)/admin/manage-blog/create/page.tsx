@@ -10,12 +10,12 @@ import FormTextArea from '@/components/Froms/FormTextArea';
 
 function CreateBlogsPage() {
   const [addBlogs, { isLoading, error, isSuccess }] = useAddblogMutation();
-  const { userId } = getUserInfo() as any;
-  console.log(userId);
+  const { id } = getUserInfo() as any;
+  console.log(id);
   const onSubmit = async (data: any) => {
     message.loading('Creating.....');
     try {
-      data.authorId = userId;
+      data.authorId = id;
       console.log(data);
       const res = await addBlogs(data).unwrap();
       console.log(res);

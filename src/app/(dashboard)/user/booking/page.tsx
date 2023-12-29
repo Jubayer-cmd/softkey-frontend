@@ -12,8 +12,8 @@ import { Button } from 'antd';
 import dayjs from 'dayjs';
 import { useState } from 'react';
 export default function BookingPage() {
-  const { userId } = getUserInfo() as any;
-  const { data, isLoading } = useUserbookingByIdQuery(userId);
+  const { id } = getUserInfo() as any;
+  const { data, isLoading } = useUserbookingByIdQuery(id);
   console.log(data);
   const [addReview] = useAddreviewMutation();
   const [ratings, setRatings] = useState(0);
@@ -84,7 +84,7 @@ export default function BookingPage() {
   const onSubmit = async (datas: any) => {
     datas.rating = ratings;
     datas.serviceId = selectedService;
-    datas.userId = userId;
+    datas.userId = id;
     console.log(datas);
     const res = await addReview(datas);
     console.log(res);

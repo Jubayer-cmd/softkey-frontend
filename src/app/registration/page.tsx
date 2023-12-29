@@ -47,7 +47,7 @@ function Registration() {
 
   return (
     <div>
-      <NavbarPage/>
+      <NavbarPage />
       <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
         <div className="w-1/2">
           <Image
@@ -181,8 +181,12 @@ function Registration() {
                 Register
               </button>
 
-              <p>already have account?</p>
-              <Link href="/login">Login</Link>
+              <p>
+                already have account?
+                <Link href="/login" className="text-blue-500">
+                  Login
+                </Link>
+              </p>
             </div>
           </form>
         </div>

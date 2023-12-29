@@ -135,8 +135,12 @@ function Login() {
               >
                 Log in
               </button>
-              <p>New to softkey? </p>
-              <Link href="/register">register</Link>
+              <p>
+                New to softkey?
+                <Link href="/registration" className="text-blue-500">
+                  registration
+                </Link>
+              </p>
             </div>
           </form>
         </div>

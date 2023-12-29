@@ -6,8 +6,8 @@ import { Button } from 'antd';
 import dayjs from 'dayjs';
 
 export default function OrdersPage() {
-  const { userId } = getUserInfo() as any;
-  const { data, isLoading } = useUserOrderIdQuery(userId);
+  const { id } = getUserInfo() as any;
+  const { data, isLoading } = useUserOrderIdQuery(id);
   console.log('fuck', data);
   const columns = [
     {

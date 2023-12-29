@@ -14,14 +14,14 @@ const CheckoutPage = () => {
   const [addOrder] = useAddorderMutation();
   const cartItems = useAppSelector((state) => state.cart.items);
   const totalSum = useAppSelector((state) => state.cart.totalSum);
-  const { userId } = getUserInfo() as any;
+  const { id } = getUserInfo() as any;
   const orderProduct: any[] = cartItems.map((cartItem) => ({
     productId: cartItem.id,
     quantity: cartItem.quantity,
   }));
   const totalAmount = totalSum + 60;
   const onSubmit = async (data: any) => {
-    data.userId = userId;
+    data.userId = id;
     data.orderProduct = orderProduct;
     data.totalAmount = totalAmount;
     data.status = 'pending';

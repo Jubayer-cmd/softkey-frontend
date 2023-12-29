@@ -9,10 +9,8 @@ import { getUserInfo } from '@/services/auth.service';
 import { Button, message } from 'antd';
 
 export default function UserPage() {
-  const { userId } = getUserInfo() as any;
-  const { data } = useUserIdQuery(userId);
-  const id = data?.id;
-  console.log(data);
+  const { id } = getUserInfo() as any;
+  const { data } = useUserIdQuery(id);
   const [updateUser] = useUpdateuserMutation();
 
   const defaultValues = {

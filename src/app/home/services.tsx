@@ -13,10 +13,9 @@ import FormTimePicker from '@/components/Froms/FormTimePicker';
 
 export default function ServiceList() {
   const { data: services } = useAllServicesQuery({});
-  console.log(services);
   const [addBooking] = useAddbookingMutation();
-  const { userId } = getUserInfo() as any;
-  console.log(userId);
+  const { id } = getUserInfo() as any;
+  console.log("check user id",id);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const isUserLoggedIn = isLoggedIn();
   const [selectedService, setSelectedService] = useState({} as any);
@@ -38,7 +37,7 @@ export default function ServiceList() {
       data.serviceId = selectedService;
       data.date = dateTime;
       data.status = 'pending';
-      data.userId = userId;
+      data.userId = id;
       // Remove the 'time' property from the data object
       delete data.time;
       console.log('check data', data);

@@ -12,8 +12,8 @@ import FormInput from '@/components/Froms/FormInput';
 import Form from '@/components/Froms/Form';
 
 export default function AdminPage() {
-  const { userId } = getUserInfo() as any;
-  const { data } = useUserIdQuery(userId);
+  const { id } = getUserInfo() as any;
+  const { data } = useUserIdQuery(id);
   const id = data?.id;
   console.log(data);
   const [updateUser] = useUpdateuserMutation();
