@@ -1,10 +1,11 @@
-"use client";
+'use client';
 
-import { Layout, Menu } from "antd";
-import { useState } from "react";
+import { Layout, Menu } from 'antd';
+import { useState } from 'react';
 
-import { sidebarItems } from "@/constants/sidebarItems";
-import { getUserInfo } from "@/services/auth.service";
+import { sidebarItems } from '@/constants/sidebarItems';
+import { getUserInfo } from '@/services/auth.service';
+import Link from 'next/link';
 
 const { Sider } = Layout;
 
@@ -22,9 +23,9 @@ const SideBar = () => {
       onCollapse={(value) => setCollapsed(value)}
       width={280}
       style={{
-        overflow: "auto",
-        height: "100vh",
-        position: "sticky",
+        overflow: 'auto',
+        height: '100vh',
+        position: 'sticky',
         left: 0,
         top: 0,
         bottom: 0,
@@ -32,19 +33,19 @@ const SideBar = () => {
     >
       <div
         style={{
-          color: "white",
-          fontSize: "2rem",
-          textAlign: "center",
-          fontWeight: "bold",
-          marginBottom: ".5rem",
-          padding: "10px 0px",
+          color: 'white',
+          fontSize: '2rem',
+          textAlign: 'center',
+          fontWeight: 'bold',
+          marginBottom: '.5rem',
+          padding: '10px 0px',
         }}
       >
-        SoftKey
+        <Link href="/"> SoftKey</Link>
       </div>
       <Menu
         theme="dark"
-        defaultSelectedKeys={["1"]}
+        defaultSelectedKeys={['1']}
         mode="inline"
         items={sidebarItems(role)}
       />

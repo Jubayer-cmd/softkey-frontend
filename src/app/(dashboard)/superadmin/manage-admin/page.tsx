@@ -105,7 +105,11 @@ export default function ManageAdmin() {
       render: function (data: any) {
         return (
           <>
-            <Button onClick={() => makeAdmin(data?.id)} type="primary" className="bg-blue-500">
+            <Button
+              onClick={() => makeAdmin(data?.id)}
+              type="primary"
+              className="bg-blue-500"
+            >
               Make Admin
             </Button>
             <Button
@@ -164,6 +168,7 @@ export default function ManageAdmin() {
               <Button
                 style={{ margin: '0px 5px' }}
                 type="primary"
+                className="bg-blue-500"
                 onClick={resetFilters}
               >
                 <ReloadOutlined />

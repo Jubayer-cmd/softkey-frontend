@@ -71,7 +71,7 @@ function ReviewPage() {
     <div>
       <p>reviewPage</p>
       <Link className="bg-primary" href="/admin/manage-review/create">
-        <Button type="primary">Create</Button>
+        <Button className="bg-blue-500" type="primary">Create</Button>
       </Link>
 
       <UMTable

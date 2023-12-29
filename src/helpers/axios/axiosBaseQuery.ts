@@ -1,17 +1,17 @@
-import { IMeta } from "@/types";
-import type { BaseQueryFn } from "@reduxjs/toolkit/query";
-import type { AxiosError, AxiosRequestConfig } from "axios";
-import { instance as axiosInstance } from "./axiosInstance";
+import { IMeta } from '@/types';
+import type { BaseQueryFn } from '@reduxjs/toolkit/query';
+import type { AxiosError, AxiosRequestConfig } from 'axios';
+import { instance as axiosInstance } from './axiosInstance';
 
 export const axiosBaseQuery =
   (
-    { baseUrl }: { baseUrl: string } = { baseUrl: "" }
+    { baseUrl }: { baseUrl: string } = { baseUrl: '' }
   ): BaseQueryFn<
     {
       url: string;
-      method: AxiosRequestConfig["method"];
-      data?: AxiosRequestConfig["data"];
-      params?: AxiosRequestConfig["params"];
+      method: AxiosRequestConfig['method'];
+      data?: AxiosRequestConfig['data'];
+      params?: AxiosRequestConfig['params'];
       meta?: IMeta;
       contentType?: string;
     },
@@ -26,10 +26,11 @@ export const axiosBaseQuery =
         data,
         params,
         headers: {
-          "Content-Type": contentType || "application/json",
+          'Content-Type': contentType || 'application/json',
         },
         withCredentials: true,
       });
+      console.log("gg",baseUrl + url);
       return result;
     } catch (axiosError) {
       let err = axiosError as AxiosError;

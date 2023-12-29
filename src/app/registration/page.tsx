@@ -1,22 +1,24 @@
-"use client";
-import { useUserRegistrationMutation } from "@/redux/api/authApi";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { message } from "antd";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
+'use client';
+import { useUserRegistrationMutation } from '@/redux/api/authApi';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { message } from 'antd';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
-import { Controller, useForm } from "react-hook-form";
-import * as Yup from "yup";
+import { Controller, useForm } from 'react-hook-form';
+import * as Yup from 'yup';
+import NavbarPage from '../home/navbar';
 
 const schema = Yup.object().shape({
-  name: Yup.string().required("Name is required"),
+  name: Yup.string().required('Name is required'),
   email: Yup.string()
-    .required("Email is required")
-    .email("Invalid email format"),
-  contactNo: Yup.string().required("Contact number is required"),
+    .required('Email is required')
+    .email('Invalid email format'),
+  contactNo: Yup.string().required('Contact number is required'),
   password: Yup.string()
-    .required("Password is required")
-    .min(8, "Password must be at least 8 characters"),
+    .required('Password is required')
+    .min(8, 'Password must be at least 8 characters'),
 });
 
 function Registration() {
@@ -35,9 +37,9 @@ function Registration() {
     console.log(data);
     const res = await userRegister({ ...data }).unwrap();
     if (res?.id) {
-      message.success("User registered successfully!");
+      message.success('User registered successfully!');
       setTimeout(() => {
-        router.push("/login");
+        router.push('/login');
       }, 3000);
     }
     console.log(res);
@@ -45,11 +47,12 @@ function Registration() {
 
   return (
     <div>
+      <NavbarPage/>
       <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
         <div className="w-1/2">
           <Image
             src={
-              "https://img.freepik.com/free-vector/computer-login-concept-illustration_114360-7962.jpg"
+              'https://img.freepik.com/free-vector/computer-login-concept-illustration_114360-7962.jpg'
             }
             width={500}
             height={500}
@@ -74,7 +77,7 @@ function Registration() {
                     type="text"
                     id="name"
                     className={`mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full py-2 px-3 border border-gray-300 rounded-md ${
-                      errors.name ? "border-red-500" : ""
+                      errors.name ? 'border-red-500' : ''
                     }`}
                   />
                 )}
@@ -102,7 +105,7 @@ function Registration() {
                     type="text"
                     id="email"
                     className={`mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full py-2 px-3 border border-gray-300 rounded-md ${
-                      errors.email ? "border-red-500" : ""
+                      errors.email ? 'border-red-500' : ''
                     }`}
                   />
                 )}
@@ -130,7 +133,7 @@ function Registration() {
                     type="text"
                     id="contactNo"
                     className={`mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full py-2 px-3 border border-gray-300 rounded-md ${
-                      errors.contactNo ? "border-red-500" : ""
+                      errors.contactNo ? 'border-red-500' : ''
                     }`}
                   />
                 )}
@@ -158,7 +161,7 @@ function Registration() {
                     type="password"
                     id="password"
                     className={`mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full py-2 px-3 border border-gray-300 rounded-md ${
-                      errors.password ? "border-red-500" : ""
+                      errors.password ? 'border-red-500' : ''
                     }`}
                   />
                 )}
@@ -177,6 +180,9 @@ function Registration() {
               >
                 Register
               </button>
+
+              <p>already have account?</p>
+              <Link href="/login">Login</Link>
             </div>
           </form>
         </div>

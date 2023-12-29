@@ -1,17 +1,20 @@
-"use client";
-import { useUserLoginMutation } from "@/redux/api/authApi";
-import { storeUserInfo } from "@/services/auth.service";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { message } from "antd";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import * as Yup from "yup";
+'use client';
+import axios from 'axios';
+import { useUserLoginMutation } from '@/redux/api/authApi';
+import { storeUserInfo } from '@/services/auth.service';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { message } from 'antd';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import * as Yup from 'yup';
+import Link from 'next/link';
+import NavbarPage from '../home/navbar';
 const schema = Yup.object().shape({
   email: Yup.string()
-    .required("Email is required")
-    .email("Invalid email format"),
-  password: Yup.string().required("Password is required"),
+    .required('Email is required')
+    .email('Invalid email format'),
+  password: Yup.string().required('Password is required'),
 });
 type FormValues = {
   email: string;
@@ -30,27 +33,37 @@ function Login() {
 
   const onSubmit: SubmitHandler<FormValues> = async (data: any) => {
     try {
-      const res = await userLogin({ ...data }).unwrap();
-      console.log("res", res);
-      // console.log(res);
-      if (res?.accessToken) {
-        router.push("/");
-        message.success("User logged in successfully!");
+      const result = await axios.post(
+        'https://softkey-backend.vercel.app/api/v1/auth/login',
+        { ...data }
+      );
+      console.log('result', result);
+
+      if (result?.data?.token) {
+        router.push('/');
+        message.success('User logged in successfully!');
+        storeUserInfo({ accessToken: result?.data?.token });
       }
-      storeUserInfo({ accessToken: res?.accessToken });
-      // console.log(res);
     } catch (err: any) {
-      console.error(err.message);
+      console.error(err);
+      if (err.response && err.response.status === 401) {
+        // Handle specific unauthorized errors
+        message.error('Invalid credentials. Please try again.');
+      } else {
+        // Handle other errors
+        message.error('An error occurred. Please try again later.');
+      }
     }
   };
 
   return (
     <div>
+      <NavbarPage />
       <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
         <div className="w-1/2">
           <Image
             src={
-              "https://img.freepik.com/free-vector/computer-login-concept-illustration_114360-7962.jpg"
+              'https://img.freepik.com/free-vector/computer-login-concept-illustration_114360-7962.jpg'
             }
             width={500}
             height={500}
@@ -75,7 +88,7 @@ function Login() {
                     type="text"
                     id="email"
                     className={`mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full py-2 px-3 border border-gray-300 rounded-md ${
-                      errors.email ? "border-red-500" : ""
+                      errors.email ? 'border-red-500' : ''
                     }`}
                   />
                 )}
@@ -103,7 +116,7 @@ function Login() {
                     type="password"
                     id="password"
                     className={`mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full py-2 px-3 border border-gray-300 rounded-md ${
-                      errors.password ? "border-red-500" : ""
+                      errors.password ? 'border-red-500' : ''
                     }`}
                   />
                 )}
@@ -122,6 +135,8 @@ function Login() {
               >
                 Log in
               </button>
+              <p>New to softkey? </p>
+              <Link href="/register">register</Link>
             </div>
           </form>
         </div>

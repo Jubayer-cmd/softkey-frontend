@@ -51,7 +51,7 @@ function CreateBlogsPage() {
         </div>
 
         <Button
-          className="btn btn-primary ml-4 mt-3"
+          className="btn bg-blue-500 btn-primary ml-4 mt-3"
           type="primary"
           htmlType="submit"
         >

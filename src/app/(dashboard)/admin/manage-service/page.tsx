@@ -31,7 +31,7 @@ function ServicePage() {
                 style={{
                   margin: '0px 5px',
                 }}
-                className='bg-blue-500'
+                className="bg-blue-500"
                 onClick={() => console.log(data)}
                 type="primary"
               >
@@ -66,7 +66,9 @@ function ServicePage() {
     <div>
       <p>ServicePage</p>
       <Link className="bg-primary" href="/admin/manage-service/create">
-        <Button type="primary">Create</Button>
+        <Button className="bg-blue-500" type="primary">
+          Create
+        </Button>
       </Link>
 
       <UMTable

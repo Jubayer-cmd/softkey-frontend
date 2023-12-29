@@ -2,12 +2,12 @@
 import ActionBar from '@/components/ui/ActionBar';
 import UMBreadCrumb from '@/components/ui/UMBreadCrumb';
 import UMTable from '@/components/ui/UMTable';
-import { useDeleteuserMutation, useUserQuery } from '@/redux/api/adminApi/userApi';
-import { useDebounced } from '@/redux/hooks';
 import {
-  DeleteOutlined,
-  ReloadOutlined
-} from '@ant-design/icons';
+  useDeleteuserMutation,
+  useUserQuery,
+} from '@/redux/api/adminApi/userApi';
+import { useDebounced } from '@/redux/hooks';
+import { DeleteOutlined, ReloadOutlined } from '@ant-design/icons';
 import { Button, Input, message } from 'antd';
 import dayjs from 'dayjs';
 import { useState } from 'react';
@@ -142,6 +142,7 @@ export default function UserPage() {
               <Button
                 style={{ margin: '0px 5px' }}
                 type="primary"
+                className="bg-blue-500"
                 onClick={resetFilters}
               >
                 <ReloadOutlined />

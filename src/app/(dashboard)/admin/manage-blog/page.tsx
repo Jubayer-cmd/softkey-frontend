@@ -35,6 +35,7 @@ function BlogsPage() {
                 style={{
                   margin: '0px 5px',
                 }}
+                className="bg-blue-500"
                 onClick={() => console.log(data)}
                 type="primary"
               >
@@ -42,6 +43,7 @@ function BlogsPage() {
               </Button>
             </Link>
             <Button
+            className="bg-blue-500"
               onClick={() => deleteHandler(data?.id)}
               type="primary"
               danger

@@ -105,7 +105,7 @@ function BookingPage() {
     <div>
       <p>bookingPage</p>
       <Link className="bg-primary" href="/admin/manage-booking/create">
-        <Button type="primary">Create</Button>
+        <Button className="bg-blue-500" type="primary">Create</Button>
       </Link>
 
       <UMTable

@@ -191,6 +191,7 @@ export default function OrderPage() {
               <Button
                 style={{ margin: '0px 5px' }}
                 type="primary"
+                className="bg-blue-500"
                 onClick={resetFilters}
               >
                 <ReloadOutlined />

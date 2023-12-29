@@ -59,7 +59,7 @@ export default function EditBlogPage({ params }: { params: { id: string } }) {
         </div>
 
         <Button
-          className="btn btn-primary ml-4 mt-3"
+          className="btn btn-primary bg-blue-500 ml-4 mt-3"
           type="primary"
           htmlType="submit"
         >

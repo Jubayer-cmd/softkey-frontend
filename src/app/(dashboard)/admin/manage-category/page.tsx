@@ -1,6 +1,9 @@
 'use client';
 import UMTable from '@/components/ui/UMTable';
-import { useAllcategorysQuery, useDeletecategoryMutation } from '@/redux/api/adminApi/categoryApi';
+import {
+  useAllcategorysQuery,
+  useDeletecategoryMutation,
+} from '@/redux/api/adminApi/categoryApi';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { Button, message } from 'antd';
 import Link from 'next/link';
@@ -30,6 +33,7 @@ function CategoryPage() {
                 }}
                 onClick={() => console.log(data)}
                 type="primary"
+                className="bg-blue-500"
               >
                 <EditOutlined />
               </Button>
