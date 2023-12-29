@@ -42,9 +42,9 @@ export default function ProductDetails({ params }: { params: { id: string } }) {
   };
 
   return (
-    <div>
+    <div className="max-w-screen-xl mx-auto">
       <NavbarPage />
-      <div className="max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
+      <div className="px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
         <div className="flex flex-col justify-between lg:flex-row gap-16 lg:items-center">
           <div className="flex flex-col gap-6 lg:w-2/4">
             <img
@@ -85,7 +85,7 @@ export default function ProductDetails({ params }: { params: { id: string } }) {
               <span className=" text-violet-600 font-semibold">
                 Special Sneaker
               </span>
-              <h1 className="text-3xl font-bold">Nike Invincible 3</h1>
+              <h1 className="text-3xl font-bold">{data?.name}</h1>
             </div>
             <p className="text-gray-700">{data?.description}</p>
             <h6 className="text-2xl font-semibold">

@@ -25,9 +25,9 @@ function NavbarPage() {
     searchQuery: searchTerm,
     delay: 600,
   });
-if (debouncedTerm.length > 2) {
-  query['searchTerm'] = debouncedTerm;
-}
+  if (debouncedTerm.length > 2) {
+    query['searchTerm'] = debouncedTerm;
+  }
   const { data, isLoading } = useProductsQuery({ ...query });
 
   const products = data?.products;
@@ -87,9 +87,9 @@ if (debouncedTerm.length > 2) {
     },
   ];
   return (
-    <div className="mb-20 ">
+    <div className="mb-20 max-w-screen-xl ">
       <div className="shadow-md w-full fixed top-0 left-0 z-10">
-        <div className="md:flex items-center justify-between bg-white py-4 md:px-10 px-7">
+        <div className="md:flex  items-center  justify-between bg-white py-4 md:px-10 px-7">
           {/* logo section */}
           <div
             onClick={() => {
@@ -105,22 +105,39 @@ if (debouncedTerm.length > 2) {
               type="text"
               placeholder="Search products..."
               value={searchTerm}
-              className="w-full p-3 rounded-2xl bg-slate-800"
+              style={{width:"300px"}}
+              className="w-full p-2 rounded-2xl bg-slate-800"
               onChange={(e) => setSearchTerm(e.target.value)}
             />
             {isLoading ? (
               <div>Loading...</div>
-            ) : (              
-               debouncedTerm.length > 2 && <div className="absolute top-16 p-4 bg-slate-800 text-white w-full rounded-xl left-1/2 -translate-x-1/2 flex flex-col gap-2">
-              <ul>
-                {products.length >0 ? products?.map((product: any) => (
-                  <li key={product.id}>
-                    <a onClick={() => {}}>{product.name}</a>
-                  </li>
-                )): <p>No Product Found</p>}
-              </ul>
-              </div>
-            )}           
+            ) : (
+              debouncedTerm.length > 2 && (
+                <div className="absolute top-16 p-4 bg-slate-800 text-white w-full rounded-xl left-1/2 -translate-x-1/2 flex flex-col gap-2">
+                  <ul>
+                    {products.length > 0 ? (
+                      products?.map((product: any) => (
+                        <li key={product.id}>
+                          <div
+                            className="my-2 cursor-pointer bg-slate-300 rounded-md"
+                            onClick={() => {
+                              router.push(`/products/${product.id}`);
+                            }}
+                          >
+                            <div className="flex items-center">
+                              <img src={product?.image} className='w-14 p-2 rounded mr-2' alt="" />
+                              <p> {product.name}</p>
+                            </div>
+                          </div>
+                        </li>
+                      ))
+                    ) : (
+                      <p>No Product Found</p>
+                    )}
+                  </ul>
+                </div>
+              )
+            )}
           </div>
           <div
             onClick={() => setToggle(!toogle)}

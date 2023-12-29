@@ -268,7 +268,7 @@ export default function ProductsList() {
             }) => (
               <li key={product.id}>
                 <div className="group relative block overflow-hidden">
-                  <button className="absolute end-4 top-4 z-10 rounded-full bg-white p-1.5 text-gray-900 transition hover:text-gray-900/75">
+                  <button className="absolute end-4 top-4 z-8 rounded-full bg-white p-1.5 text-gray-900 transition hover:text-gray-900/75">
                     <span className="sr-only">Wishlist</span>
 
                     <svg
@@ -290,7 +290,7 @@ export default function ProductsList() {
                   <img
                     src={product.image}
                     alt=""
-                    className="h-48 w-full object-fill transition duration-500 group-hover:scale-105 sm:h-72"
+                    className="h-32 w-full object-fill transition duration-500 group-hover:scale-105 sm:h-72"
                   />
 
                   <div className="relative border border-gray-100 bg-white p-6">

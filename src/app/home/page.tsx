@@ -4,6 +4,7 @@ import Footer from './footer';
 import Navbar from './navbar';
 import ProductsList from './products';
 import SectionPage from './section';
+import SideSection from './sectionSIde';
 import ServiceList from './services';
 import Testmonial from './testmonial';
 
@@ -16,6 +17,7 @@ export default function HomePage() {
       <ServiceList />
       <CollectionPage />
       <SectionPage />
+      <SideSection />
       <Testmonial />
       <Footer />
     </div>

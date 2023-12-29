@@ -6,6 +6,7 @@
 
 => NextJs
 => Ant Design
+=> Tailwindcss
 => NextJs/App router
 => Rtk query
 => Axios
@@ -16,6 +17,8 @@
 - Manage service(delete,update )
 - Manage User
 - Manage booking(delete,update )
+- Manager Orders
+- Manage Inventory & Contents
 
 ## 4. User Dashboard
 
@@ -36,19 +39,19 @@
 
 # Live Link
 
-- https://booking-service-management-farshid-997.vercel.app/
+- https://softkey-frontend.vercel.app/
 
 # Admin email and password
 
-1. email- ahmed2@example.com
-   password- f123
+1. email- admin@gmail.com
+   password- 11223344
 
 # user email and password
 
-1. email - ahmed@example.com
-   password-f123
+1. email - jubayer@gmail.com
+   password-11223344
 
 # superadmin
 
-1. email -anik314@example.com
-   password-f123
+1. email -superadmin@gmail.com
+   password-11223344
