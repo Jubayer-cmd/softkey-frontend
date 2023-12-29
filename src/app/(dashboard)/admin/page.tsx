@@ -7,8 +7,9 @@ import {
 } from '@/redux/api/adminApi/userApi';
 import { getUserInfo } from '@/services/auth.service';
 import { Button, message } from 'antd';
-import Form from './../../../components/froms/Form';
-import FormInput from './../../../components/froms/FormInput';
+
+import FormInput from '@/components/Froms/FormInput';
+import Form from '@/components/Froms/Form';
 
 export default function AdminPage() {
   const { userId } = getUserInfo() as any;

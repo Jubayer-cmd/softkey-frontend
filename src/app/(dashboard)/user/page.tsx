@@ -1,6 +1,6 @@
 'use client';
-import Form from '@/components/froms/Form';
-import FormInput from '@/components/froms/FormInput';
+import Form from '@/components/Froms/Form';
+import FormInput from '@/components/Froms/FormInput';
 import {
   useUpdateuserMutation,
   useUserIdQuery,

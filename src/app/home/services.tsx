@@ -7,9 +7,9 @@ import { getUserInfo, isLoggedIn } from '@/services/auth.service';
 import { Button, message } from 'antd';
 import dayjs from 'dayjs';
 import { useState } from 'react';
-import Form from './../../components/froms/Form';
-import FormDatePicker from './../../components/froms/FormDatePicker';
-import FormTimePicker from './../../components/froms/FormTimePicker';
+import Form from '@/components/Froms/Form';
+import FormDatePicker from '@/components/Froms/FormDatePicker';
+import FormTimePicker from '@/components/Froms/FormTimePicker';
 
 export default function ServiceList() {
   const { data: services } = useAllServicesQuery({});

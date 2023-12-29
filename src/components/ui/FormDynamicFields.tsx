@@ -5,8 +5,8 @@ import { useFieldArray, useFormContext } from 'react-hook-form';
 
 import { daysOptions } from '@/constants/global';
 
-import FormSelectField from '../froms/FormSelectField';
-import FormTimePicker from './../froms/FormTimePicker';
+import FormSelectField from '../Froms/FormSelectField';
+import FormTimePicker from './../Froms/FormTimePicker';
 
 const FormDynamicFields = () => {
   const { control } = useFormContext();

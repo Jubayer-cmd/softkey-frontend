@@ -1,6 +1,6 @@
 'use client';
-import Form from '@/components/froms/Form';
-import FormTextArea from '@/components/froms/FormTextArea';
+import Form from '@/components/Froms/Form';
+import FormTextArea from '@/components/Froms/FormTextArea';
 import ReusableModal from '@/components/ui/ReusableModal';
 import UMTable from '@/components/ui/UMTable';
 import { useUserbookingByIdQuery } from '@/redux/api/adminApi/bookingApi';

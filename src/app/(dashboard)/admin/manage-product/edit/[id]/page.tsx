@@ -1,7 +1,7 @@
 'use client';
 
-import { SelectOptions } from '@/components/froms/FormMultiSelectField';
-import FormSelectField from '@/components/froms/FormSelectField';
+import { SelectOptions } from '@/components/Froms/FormMultiSelectField';
+import FormSelectField from '@/components/Froms/FormSelectField';
 import UMBreadCrumb from '@/components/ui/UMBreadCrumb';
 import { useAllcategorysQuery } from '@/redux/api/adminApi/categoryApi';
 import {
@@ -9,9 +9,9 @@ import {
   useUpdateproductMutation,
 } from '@/redux/api/adminApi/productApi';
 import { Button, message } from 'antd';
-import Form from './../../../../../../components/froms/Form';
-import FormInput from './../../../../../../components/froms/FormInput';
-import FormTextArea from './../../../../../../components/froms/FormTextArea';
+import Form from '@/components/Froms/Form';
+import FormInput from '@/components/Froms/FormInput';
+import FormTextArea from '@/components/Froms/FormTextArea';
 
 export default function UpdateProduct({ params }: { params: { id: string } }) {
   const { data } = useProductIdQuery(params?.id);

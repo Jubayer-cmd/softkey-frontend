@@ -17,7 +17,6 @@ enum BookingStatus {
 function BookingPage() {
   const query: Record<string, any> = {};
   const { data, isLoading } = useAllbookingsQuery(query);
-  console.log('fuck', data);
   const { Option } = Select;
 
   const orderStatusOptions = Object.values(BookingStatus);

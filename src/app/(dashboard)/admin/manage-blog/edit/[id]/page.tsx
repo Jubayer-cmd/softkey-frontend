@@ -6,9 +6,10 @@ import {
   useUpdateblogMutation,
 } from '@/redux/api/adminApi/blogApi';
 import { Button, message } from 'antd';
-import Form from './../../../../../../components/froms/Form';
-import FormInput from './../../../../../../components/froms/FormInput';
-import FormTextArea from './../../../../../../components/froms/FormTextArea';
+import Form from '@/components/Froms/Form';
+import FormInput from '@/components/Froms/FormInput';
+import FormTextArea from '@/components/Froms/FormTextArea';
+// import FormTextArea from './../../../../../../components/froms/FormTextArea';
 
 export default function EditBlogPage({ params }: { params: { id: string } }) {
   const { data } = useBlogIdQuery(params?.id);
